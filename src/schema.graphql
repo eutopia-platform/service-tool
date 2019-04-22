@@ -1,5 +1,10 @@
+type Toolkit {
+  title: String!
+}
+
 type Query {
   hello: String
+  toolkits: [Toolkit]
 }
 
 schema {

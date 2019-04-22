@@ -1,7 +1,9 @@
 CREATE SCHEMA IF NOT EXISTS sc_tool;
 
 DROP TABLE IF EXISTS sc_tool.toolkit;
-CREATE TABLE sc_tool.toolkit();
+CREATE TABLE sc_tool.toolkit(
+  title   varchar   NOT NULL
+);
 
 DROP USER IF EXISTS service_tool;
 CREATE USER service_tool;
