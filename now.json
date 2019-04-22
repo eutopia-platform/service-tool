@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "alias": ["tool.api.productcube.io"],
+  "name": "service_tool",
+  "builds": [{ "src": "index.js", "use": "@now/node" }],
+  "scope": "eutopia",
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "DATABASE_NAME": "@database_name",
+    "TOOL_DATABASE_PASSWORD": "@tool_database_password"
+  }
+}
