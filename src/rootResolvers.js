@@ -11,7 +11,7 @@ const knex = require('knex')({
 
 const dbSchema = 'sc_tool'
 const select = async cond => await knex.select().withSchema(dbSchema).from('toolkit').where(cond ? cond : {})
-const selectSingle = async cond => await select(cond) |> (_ => #.length ?#[0] : null) ()
+const selectSingle = async cond => await select(cond) |> (#.length ? #[0] : null)
 
 export default {
   hello: () => 'hello there!',
