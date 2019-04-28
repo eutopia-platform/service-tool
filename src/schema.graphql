@@ -1,5 +1,6 @@
 type Toolkit {
   title: String!
+  description: String
 }
 
 type Query {
