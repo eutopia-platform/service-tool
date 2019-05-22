@@ -4,7 +4,6 @@ import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 import fetch from 'node-fetch'
-import gql from 'graphql-tag'
 
 class Service {
   constructor(url) {
@@ -29,18 +28,6 @@ class Service {
         })
       ]),
       cache: new InMemoryCache()
-    })
-  }
-
-  async query(query) {
-    return await this.client.query({
-      query: gql`${query}`
-    })
-  }
-
-  async mutate(mutation) {
-    return await this.client.mutate({
-      mutation: gql`${mutation}`
     })
   }
 }
