@@ -12,4 +12,4 @@ If you want to connect to a new database, the DB setup instructions can be found
 
 The service accepts `GET` and `POST` requests for GraphQL queries.
 
-The current version on master gets automatically deployed to https://auth.api.productcube.io
+The current version on master gets automatically deployed to https://tool.api.productcube.io
