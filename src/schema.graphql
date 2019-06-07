@@ -1,4 +1,5 @@
 type Toolkit {
+  id: ID!
   title: String!
   description: String
 }
