@@ -2,6 +2,7 @@ type Toolkit {
   id: ID!
   title: String!
   description: String
+  description_markdown: String
 }
 
 type Query {
