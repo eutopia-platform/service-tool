@@ -3,11 +3,13 @@ type Toolkit {
   title: String!
   description: String
   description_markdown: String
+  canvas: String
 }
 
 type Query {
   hello: String
   toolkits: [Toolkit]
+  toolkit(id: ID!): Toolkit
 }
 
 schema {
