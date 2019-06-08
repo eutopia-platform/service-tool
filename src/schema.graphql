@@ -4,6 +4,7 @@ type Toolkit {
   description: String
   description_markdown: String
   canvas: String
+  learning: String
 }
 
 type Query {
