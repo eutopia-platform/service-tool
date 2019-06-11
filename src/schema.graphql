@@ -7,12 +7,25 @@ type Toolkit {
   learning: String
 }
 
+input editToolkit {
+  id: ID!
+  title: String
+  description: String
+  canvas: String
+  learning: String
+}
+
 type Query {
   hello: String
   toolkits: [Toolkit]
   toolkit(id: ID!): Toolkit
 }
 
+type Mutation {
+  editToolkit(toolkit: editToolkit!): Toolkit!
+}
+
 schema {
   query: Query
+  mutation: Mutation
 }

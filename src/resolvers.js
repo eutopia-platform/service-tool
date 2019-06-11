@@ -1,4 +1,4 @@
-import { UserInputError } from 'apollo-server-micro'
+import { UserInputError, ForbiddenError } from 'apollo-server-micro'
 
 const knex = require('knex')({
   client: 'pg',
@@ -26,6 +26,31 @@ export default {
       const kit = (await knex('toolkit').where({ id }))[0]
       if (!kit) throw new UserInputError('DOES_NOT_EXIST')
       return kit
+    }
+  },
+
+  Mutation: {
+    editToolkit: async (
+      root,
+      { toolkit: { id, description, learning } },
+      { userRole }
+    ) => {
+      if (userRole !== 'ADMIN') throw new ForbiddenError('UNAUTHORIZED')
+
+      const toolkit = isValidUUID(id)
+        ? (await knex('toolkit')
+            .select('description_markdown', 'learning')
+            .where({ id }))[0]
+        : []
+      if (toolkit.length === 0) throw new UserInputError('INVALID_ID')
+
+      if (description) toolkit.description_markdown = description
+      if (learning) toolkit.learning = learning
+
+      return (await knex('toolkit')
+        .where({ id })
+        .update(toolkit)
+        .returning('*'))[0]
     }
   },
 
