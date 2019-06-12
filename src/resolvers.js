@@ -20,7 +20,7 @@ const isValidUUID = uuid =>
 export default {
   Query: {
     hello: () => 'toolkit service says hello',
-    toolkits: async () => await knex('toolkit').select(),
+    toolkits: async () => await knex('toolkit').where({ visibility: 'PUBLIC' }),
     toolkit: async (root, { id }) => {
       if (!isValidUUID(id)) throw new UserInputError('INVALID_UUID')
       const kit = (await knex('toolkit').where({ id }))[0]

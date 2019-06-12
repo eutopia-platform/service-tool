@@ -1,8 +1,17 @@
 CREATE SCHEMA IF NOT EXISTS sc_tool;
 
+CREATE TYPE sc_tool.visibility AS ENUM ('PUBLIC', 'UNLISTED');
+
 DROP TABLE IF EXISTS sc_tool.toolkit;
 CREATE TABLE sc_tool.toolkit(
-  title   varchar   NOT NULL
+  id                    uuid      PRIMARY KEY,
+  title                 varchar   NOT NULL,
+  description           varchar,
+  description_markdown  varchar,
+  canvas                json,
+  learning              varchar,
+  workflow              varchar,
+  visibility            sc_tool.visibility  DEFAULT 'UNLISTED'
 );
 
 DROP USER IF EXISTS service_tool;

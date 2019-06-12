@@ -1,3 +1,8 @@
+enum Visibility {
+  PUBLIC
+  UNLISTED
+}
+
 type Toolkit {
   id: ID!
   title: String!
@@ -5,6 +10,7 @@ type Toolkit {
   description_markdown: String
   canvas: String
   learning: String
+  visibility: Visibility
 }
 
 input editToolkit {
