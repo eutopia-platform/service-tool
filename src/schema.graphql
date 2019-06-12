@@ -1,13 +1,40 @@
+enum Visibility {
+  PUBLIC
+  UNLISTED
+}
+
 type Toolkit {
+  id: ID!
   title: String!
   description: String
+  description_markdown: String
+  canvas: String
+  learning: String
+  visibility: Visibility
+}
+
+input editToolkit {
+  id: ID!
+  title: String
+  description: String
+  canvas: String
+  learning: String
 }
 
 type Query {
   hello: String
   toolkits: [Toolkit]
+  toolkit(id: ID!): Toolkit
+}
+
+type Mutation {
+  editToolkit(toolkit: editToolkit!): Toolkit!
+  createToolkit: Toolkit!
+  deleteToolkit(id: ID!): Boolean
+  setVisibility(id: ID!, status: String): Toolkit!
 }
 
 schema {
   query: Query
+  mutation: Mutation
 }
