@@ -1,6 +1,7 @@
 import { ApolloServer, gql } from 'apollo-server-micro'
 import schema from './schema'
 import resolvers from './resolvers'
+import { auth as authService } from './interService'
 
 const headers = {
   'Content-Type': 'application/json',
@@ -23,9 +24,36 @@ export default async (request, response) => {
     response.setHeader(header, headers[header])
   )
 
+  const sessionToken = request.headers['session-token'] || null
+
+  const { userId, userRole } = await authService
+    .query({
+      query: gql`
+        query sessionUser($sessionToken: ID!) {
+          user(sessionToken: $sessionToken) {
+            id
+            role
+          }
+        }
+      `,
+      variables: {
+        sessionToken
+      },
+      fetchPolicy: 'network-only'
+    })
+    .then(({ data: { user: { id, role } } }) => ({
+      userId: id,
+      userRole: role
+    }))
+    .catch(() => ({ userId: null, role: 'USER' }))
+
   new ApolloServer({
     typeDefs: schema,
-    resolvers
+    resolvers,
+    context: {
+      userId,
+      userRole
+    }
   }).createHandler({
     path: '/'
   })(request, response)
