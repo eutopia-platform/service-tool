@@ -32,14 +32,14 @@ export default {
   Mutation: {
     editToolkit: async (
       root,
-      { toolkit: { id, title, description, learning } },
+      { toolkit: { id, title, description, learning, canvas } },
       { userRole }
     ) => {
       if (userRole !== 'ADMIN') throw new ForbiddenError('UNAUTHORIZED')
 
       const toolkit = isValidUUID(id)
         ? (await knex('toolkit')
-            .select('title', 'description_markdown', 'learning')
+            .select('title', 'description_markdown', 'learning', 'canvas')
             .where({ id }))[0]
         : []
       if (toolkit.length === 0) throw new UserInputError('INVALID_ID')
@@ -47,6 +47,7 @@ export default {
       if (title) toolkit.title = title
       if (description) toolkit.description_markdown = description
       if (learning) toolkit.learning = learning
+      if (canvas) toolkit.canvas = canvas
 
       return (await knex('toolkit')
         .where({ id })
