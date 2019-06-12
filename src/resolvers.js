@@ -86,6 +86,16 @@ export default {
       await knex('toolkit')
         .where({ id })
         .del()
+    },
+
+    setVisibility: async (root, { id, status }, { userRole }) => {
+      if (userRole !== 'ADMIN') throw new ForbiddenError('UNAUTHORIZED')
+      if (!['PUBLIC', 'UNLISTED'].includes(status))
+        throw new UserInputError('INVALID_STATUS')
+      return (await knex('toolkit')
+        .where({ id })
+        .update({ visibility: status })
+        .returning('*'))[0]
     }
   },
 
