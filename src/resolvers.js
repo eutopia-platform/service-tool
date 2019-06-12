@@ -79,6 +79,13 @@ export default {
           })
         })
         .returning('*'))[0]
+    },
+
+    deleteToolkit: async (root, { id }, { userRole }) => {
+      if (userRole !== 'ADMIN') throw new ForbiddenError('UNAUTHORIZED')
+      await knex('toolkit')
+        .where({ id })
+        .del()
     }
   },
 
