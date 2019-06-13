@@ -37,7 +37,7 @@ export default {
   Mutation: {
     editToolkit: async (
       root,
-      { toolkit: { id, title, description, learning, canvas } },
+      { toolkit: { id, title, description, workflow, learning, canvas } },
       { userRole }
     ) => {
       if (userRole !== 'ADMIN') throw new ForbiddenError('UNAUTHORIZED')
@@ -51,6 +51,7 @@ export default {
 
       if (title) toolkit.title = title
       if (description) toolkit.description_markdown = description
+      if (workflow) toolkit.workflow = workflow
       if (learning) toolkit.learning = learning
       if (canvas) toolkit.canvas = canvas
 
