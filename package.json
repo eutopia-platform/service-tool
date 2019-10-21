@@ -24,7 +24,7 @@
     "apollo-link-http": "^1.5.14",
     "apollo-server-micro": "^2.6.2",
     "graphql": "^14.2.1",
-    "knex": "^0.16.5",
+    "knex": "^0.19.5",
     "micro": "^9.3.3",
     "node-fetch": "^2.3.0",
     "pg": "^7.10.0",
